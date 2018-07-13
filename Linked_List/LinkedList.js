@@ -64,7 +64,7 @@ function LinkedList() {
 
     this.removeAt = function (position) {
 
-        if ( position > -1 && positon < length){
+        if ( position > -1 && position < length){
 
             let current = head, previous, index = 0;
 
@@ -72,16 +72,16 @@ function LinkedList() {
                 head = current.next;
             }else {
 
-                while (index++ < position){
-                    previous = current;
-                    current = current.next;
+               while (index++ < position){
+                  previous = current;
+                  current = current.next
                 }
 
                 previous.next = current.next;
 
             }
-
             length--;
+
             return current.element;
 
         }else {
@@ -91,24 +91,41 @@ function LinkedList() {
     };
 
     this.remove = function (element) {
-        
+
+      let index = this.indexOf(element);
+
+      return this.removeAt(index);
+
     };
 
     this.indexOf = function (element) {
 
+        let current = head, index = 0;
+
+        while (current) {
+
+          if (element == current.element){
+            return index;
+          }
+            index++;
+          current = current.next;
+
+        }
+
+        return -1;
     };
 
     this.isEmpty = function () {
-
+        return length == 0;
     };
 
     this.size = function () {
-        
+      return length;
     };
 
     this.toString = function () {
 
-        let string = '';
+        let string = '', current = head;
 
         while (current){
 
@@ -123,11 +140,26 @@ function LinkedList() {
     };
 
     this.print = function () {
+      console.log(this.toString());
+    };
 
+    this.getHead = function(){
+      return head;
     };
 }
+
 
 let linkedList = new LinkedList();
 
 linkedList.append(23);
 linkedList.append(28);
+linkedList.append(43);
+linkedList.append(5);
+linkedList.append(45);
+linkedList.append(32);
+linkedList.insert(3, 60);
+linkedList.print();
+
+//linkedList.remove(43);
+
+linkedList.print();
