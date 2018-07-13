@@ -31,6 +31,35 @@ function LinkedList() {
 
     this.insert = function (position, element) {
 
+        if (position >= 0 && position <= length){
+
+            let node =  new Node(element);
+
+            let current = head, previous, index = 0;
+
+            if(position == 0){
+
+                node.next = current;
+                head = node;
+            }else{
+
+                while (index++ < position){
+                    previous = current;
+                    current = current.next;
+                }
+
+                node.next = current;
+                previous.next = node;
+
+            }
+
+            length++;
+            return true;
+
+        }else {
+            return false;
+        }
+
     };
 
     this.removeAt = function (position) {
@@ -41,8 +70,19 @@ function LinkedList() {
 
             if (position == 0){
                 head = current.next;
+            }else {
+
+                while (index++ < position){
+                    previous = current;
+                    current = current.next;
+                }
+
+                previous.next = current.next;
+
             }
 
+            length--;
+            return current.element;
 
         }else {
             return null;
@@ -67,6 +107,18 @@ function LinkedList() {
     };
 
     this.toString = function () {
+
+        let string = '';
+
+        while (current){
+
+            string += current.element + (current.next ? 'n': '');
+
+            current = current.next;
+
+        }
+
+        return string;
 
     };
 
